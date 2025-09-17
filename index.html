@@ -7,251 +7,411 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <meta name="color-scheme" content="light dark" />
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+    
     @media print {
       .no-print { display: none !important; }
       a[href]:after { content: "" !important; }
       body { color: #000; }
     }
+    
+    .gradient-bg {
+      background: linear-gradient(135deg, #e0f2fe 0%, #f8fafc 50%, #f1f5f9 100%);
+    }
+    
+    .glass-card {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+    }
+    
+    .blue-gradient {
+      background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+    }
+    
+    .soft-shadow {
+      box-shadow: 0 4px 20px rgba(59, 130, 246, 0.08);
+    }
+    
+    .icon-pulse {
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+    
+    .section-card {
+      transition: all 0.3s ease;
+    }
+    
+    .section-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(59, 130, 246, 0.12);
+    }
+    
+    .nav-link {
+      transition: all 0.2s ease;
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.5rem;
+      display: inline-block;
+    }
+    
+    .nav-link:hover {
+      background: rgba(59, 130, 246, 0.08);
+      color: #1e40af;
+      text-decoration: none;
+    }
   </style>
 </head>
-<body class="bg-gradient-to-b from-slate-50 to-white text-slate-800 antialiased">
-  <header class="border-b bg-white/80 backdrop-blur sticky top-0 z-50">
-    <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
-      <div>
-        <p class="text-xs uppercase tracking-widest text-slate-500">Document légal</p>
-        <h1 class="text-xl font-semibold">Politique de Confidentialité</h1>
+<body class="gradient-bg text-slate-700 antialiased min-h-screen">
+  <!-- Header avec logo -->
+  <header class="glass-card sticky top-0 z-50 border-b border-blue-100/50">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-4">
+        <!-- Logo de l'application -->
+        <div class="flex items-center justify-center w-12 h-12 blue-gradient rounded-xl soft-shadow">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-pulse">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+          </svg>
+        </div>
+        <div>
+          <p class="text-xs uppercase tracking-wider text-blue-500 font-medium">Document légal</p>
+          <h1 class="text-xl font-semibold text-slate-800">Politique de Confidentialité</h1>
+        </div>
       </div>
-      <div class="no-print flex items-center gap-2">
-        <button onclick="window.print()" class="inline-flex items-center gap-2 rounded-xl border border-slate-200 px-3 py-2 text-sm font-medium hover:bg-slate-50 active:scale-[.99] transition">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
+      <div class="no-print flex items-center gap-3">
+        <button onclick="window.print()" class="inline-flex items-center gap-2 rounded-xl bg-white/70 backdrop-blur-sm border border-blue-200/50 px-4 py-2.5 text-sm font-medium text-blue-700 hover:bg-blue-50 hover:border-blue-300 active:scale-95 transition-all duration-200 soft-shadow">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/>
+          </svg>
           Imprimer / PDF
         </button>
       </div>
     </div>
   </header>
 
-  <main class="max-w-4xl mx-auto px-4 py-8">
-    <!-- En-tête / résumé -->
-    <section class="mb-8">
-      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h2 class="text-2xl font-bold mb-2">Application : <span class="text-slate-900" id="appName">Tensiomètre</span></h2>
-        <p class="text-slate-600 leading-relaxed">Cette politique explique comment nous collectons, utilisons, stockons et protégeons vos données personnelles lorsque vous utilisez l'application <span class="font-medium">Tensiomètre</span> (ci-après, « l’Application »). Elle s’applique à toutes les fonctionnalités, y compris la saisie de mesures de pression artérielle, l’analyse des tendances, et — si vous l’activez — la sauvegarde/partage dans le cloud.</p>
-        <div class="mt-4 grid gap-2 text-sm text-slate-600 sm:grid-cols-2">
-          <div>
-            <span class="font-medium text-slate-700">Responsable du traitement :</span>
-            <div><span id="orgName">MERCY INNOVATION LAB</span></div>
+  <main class="max-w-5xl mx-auto px-6 py-8">
+    <!-- En-tête principal avec informations de l'app -->
+    <section class="mb-10">
+      <div class="glass-card rounded-3xl p-8 section-card">
+        <div class="flex items-start gap-6">
+          <div class="flex items-center justify-center w-16 h-16 blue-gradient rounded-2xl soft-shadow flex-shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+            </svg>
           </div>
-          <div>
-            <span class="font-medium text-slate-700">Contact :</span>
-            <div><a id="contactEmail" class="underline hover:no-underline" href="mailto:contact@exemple.com">https://mi-tech.site</a></div>
-          </div>
-          <div>
-            <span class="font-medium text-slate-700">Adresse postale :</span>
-            <div id="orgAddress">mercyinnovationlabb@gmail.com</div>
-          </div>
-          <div>
-            <span class="font-medium text-slate-700">Dernière mise à jour :</span>
-            <div id="lastUpdated">12 septembre 2025</div>
+          <div class="flex-1">
+            <h2 class="text-3xl font-bold mb-3 bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+              Application : <span id="appName">Mercy Tensio</span>
+            </h2>
+            <p class="text-slate-600 text-lg leading-relaxed mb-6">
+              Cette politique explique comment nous collectons, utilisons, stockons et protégeons vos données personnelles lorsque vous utilisez l'application <span class="font-medium text-blue-700">Mercy-Tensio</span>Elle s'applique à toutes les fonctionnalités, y compris la saisie de mesures de pression artérielle et l'analyse.
+            </p>
+            <div class="grid gap-4 text-sm sm:grid-cols-2">
+              <div class="bg-blue-50/50 rounded-xl p-4">
+                <span class="font-semibold text-blue-800">Responsable du traitement :</span>
+                <div class="text-slate-700 mt-1"><span id="orgName">MERCY INNOVATION LAB</span></div>
+              </div>
+              <div class="bg-blue-50/50 rounded-xl p-4">
+                <span class="font-semibold text-blue-800">Contact :</span>
+                <div class="text-slate-700 mt-1">
+                  <a id="contactEmail" class="text-blue-600 hover:text-blue-700 transition-colors" href="mailto:contact@exemple.com">https://mi-tech.site</a>
+                </div>
+              </div>
+              <div class="bg-blue-50/50 rounded-xl p-4">
+                <span class="font-semibold text-blue-800">Email :</span>
+                <div class="text-slate-700 mt-1" id="orgAddress">mercyinnovationlabb@gmail.com</div>
+              </div>
+              <div class="bg-blue-50/50 rounded-xl p-4">
+                <span class="font-semibold text-blue-800">Dernière mise à jour :</span>
+                <div class="text-slate-700 mt-1" id="lastUpdated">12 septembre 2025</div>
+              </div>
+            </div>
           </div>
         </div>
-        <p class="mt-4 text-xs text-slate-500">⚠️ Ce modèle est fourni à titre informatif et ne constitue pas un conseil juridique. Adaptez-le à votre usage réel et faites-le valider par un juriste si nécessaire.</p>
       </div>
     </section>
 
-    <!-- Sommaire -->
-    <nav class="mb-8">
-      <div class="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-        <h3 class="text-lg font-semibold mb-3">Sommaire</h3>
-        <ol class="grid gap-2 sm:grid-cols-2 text-slate-700 text-sm list-decimal list-inside">
-          <li><a class="underline hover:no-underline" href="#definitions">Définitions</a></li>
-          <li><a class="underline hover:no-underline" href="#identite">Identité & coordonnées</a></li>
-          <li><a class="underline hover:no-underline" href="#donnees">Données que nous collectons</a></li>
-          <li><a class="underline hover:no-underline" href="#finalites">Finalités & bases légales</a></li>
-          <li><a class="underline hover:no-underline" href="#stockage">Lieu, transfert & sécurité</a></li>
-          <li><a class="underline hover:no-underline" href="#conservation">Durées de conservation</a></li>
-          <li><a class="underline hover:no-underline" href="#partage">Partage avec des tiers</a></li>
-          <li><a class="underline hover:no-underline" href="#droits">Vos droits</a></li>
-          <li><a class="underline hover:no-underline" href="#enfants">Protection des mineurs</a></li>
-          <li><a class="underline hover:no-underline" href="#services">Services et SDK tiers</a></li>
-          <li><a class="underline hover:no-underline" href="#cookies">Cookies & technologies similaires</a></li>
-          <li><a class="underline hover:no-underline" href="#maj">Mises à jour de la politique</a></li>
-          <li><a class="underline hover:no-underline" href="#contact">Contact</a></li>
-        </ol>
+    <!-- Sommaire moderne -->
+    <nav class="mb-10">
+      <div class="glass-card rounded-3xl p-8 section-card">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-8 h-8 blue-gradient rounded-lg flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 3h18v18H3zM9 9h6v6H9z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-semibold text-slate-800">Sommaire</h3>
+        </div>
+        <div class="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+          <a class="nav-link text-slate-700 hover:text-blue-700" href="#definitions">1. Définitions</a>
+          <a class="nav-link text-slate-700 hover:text-blue-700" href="#identite">2. Identité & coordonnées</a>
+          <a class="nav-link text-slate-700 hover:text-blue-700" href="#donnees">3. Données collectées</a>
+          <a class="nav-link text-slate-700 hover:text-blue-700" href="#finalites">4. Finalités & bases légales</a>
+          <a class="nav-link text-slate-700 hover:text-blue-700" href="#stockage">5. Lieu & sécurité</a>
+          <a class="nav-link text-slate-700 hover:text-blue-700" href="#conservation">6. Conservation</a>
+          <a class="nav-link text-slate-700 hover:text-blue-700" href="#partage">7. Partage avec tiers</a>
+          <a class="nav-link text-slate-700 hover:text-blue-700" href="#droits">8. Vos droits</a>
+          <a class="nav-link text-slate-700 hover:text-blue-700" href="#enfants">9. Protection mineurs</a>
+          <a class="nav-link text-slate-700 hover:text-blue-700" href="#cookies">10. Cookies & technologies</a>
+          <a class="nav-link text-slate-700 hover:text-blue-700" href="#maj">11. Mises à jour</a>
+          <a class="nav-link text-slate-700 hover:text-blue-700" href="#contact">12. Contact</a>
+        </div>
       </div>
     </nav>
 
-    <!-- Sections -->
+    <!-- Sections avec design amélioré -->
     <section id="definitions" class="mb-8">
-      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h3 class="text-xl font-semibold mb-3">1. Définitions</h3>
-        <ul class="list-disc pl-6 space-y-1 text-slate-700">
-          <li><span class="font-medium">« Données personnelles »</span> : toute information se rapportant à une personne identifiée ou identifiable.</li>
-          <li><span class="font-medium">« Traitement »</span> : toute opération appliquée à des données (collecte, enregistrement, consultation, etc.).</li>
-          <li><span class="font-medium">« Appareils »</span> : votre smartphone, tablette, ou tensiomètre compatible (p. ex. Bluetooth).</li>
-        </ul>
+      <div class="glass-card rounded-3xl p-8 section-card">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+            <span class="text-blue-600 font-bold text-sm">1</span>
+          </div>
+          <h3 class="text-xl font-semibold text-slate-800">Définitions</h3>
+        </div>
+        <div class="space-y-3">
+          <div class="bg-gradient-to-r from-blue-50/50 to-transparent rounded-xl p-4 border-l-4 border-blue-200">
+            <span class="font-semibold text-blue-800">« Données personnelles »</span> : toute information se rapportant à une personne identifiée ou identifiable.
+          </div>
+          <div class="bg-gradient-to-r from-blue-50/50 to-transparent rounded-xl p-4 border-l-4 border-blue-200">
+            <span class="font-semibold text-blue-800">« Traitement »</span> : toute opération appliquée à des données (collecte, enregistrement, consultation, etc.).
+          </div>
+          <div class="bg-gradient-to-r from-blue-50/50 to-transparent rounded-xl p-4 border-l-4 border-blue-200">
+            <span class="font-semibold text-blue-800">« Appareils »</span> : votre smartphone, tablette, ou tensiomètre compatible (p. ex. Bluetooth).
+          </div>
+        </div>
       </div>
     </section>
 
     <section id="identite" class="mb-8">
-      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h3 class="text-xl font-semibold mb-3">2. Identité & coordonnées du responsable</h3>
-        <p class="text-slate-700">Le responsable du traitement est <span class="font-medium" data-field="orgName">MERCY INNOVATION LAB</span>. Pour toute question relative à la protection des données, contactez-nous à <a class="underline hover:no-underline" href="mailto:contact@exemple.com" data-field="contactEmail">contact@exemple.com</a>.</p>
+      <div class="glass-card rounded-3xl p-8 section-card">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+            <span class="text-blue-600 font-bold text-sm">2</span>
+          </div>
+          <h3 class="text-xl font-semibold text-slate-800">Identité & coordonnées du responsable</h3>
+        </div>
+        <p class="text-slate-700 leading-relaxed">
+          Le responsable du traitement est <span class="font-semibold text-blue-700" data-field="orgName">MERCY INNOVATION LAB</span>. Pour toute question relative à la protection des données, contactez-nous à <a class="text-blue-600 hover:text-blue-700 underline transition-colors" href="mailto:contact@exemple.com" data-field="contactEmail">contact@exemple.com</a>.
+        </p>
       </div>
     </section>
 
     <section id="donnees" class="mb-8">
-      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm space-y-4">
-        <h3 class="text-xl font-semibold">3. Données que nous collectons</h3>
-        <p class="text-slate-700">L’Application peut fonctionner <span class="font-medium">hors ligne</span>. Par défaut, vos données sont stockées <span class="font-medium">localement sur votre appareil</span>. Vous pouvez choisir d’activer des services en ligne (sauvegarde, synchronisation) : dans ce cas, des données peuvent transiter vers nos serveurs ou ceux de prestataires tiers (voir §10).</p>
-
-        <div class="space-y-2">
-          <h4 class="font-semibold">3.1 Données de santé saisies par vous</h4>
-          <ul class="list-disc pl-6 text-slate-700 space-y-1">
-            <li>Mesures de pression artérielle (systolique, diastolique), fréquence cardiaque, date/heure.</li>
-            <li>Annotations facultatives : symptômes, posture, bras mesuré, commentaires.</li>
-          </ul>
+      <div class="glass-card rounded-3xl p-8 section-card">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+            <span class="text-blue-600 font-bold text-sm">3</span>
+          </div>
+          <h3 class="text-xl font-semibold text-slate-800">Données que nous collectons</h3>
+        </div>
+        
+        <div class="bg-gradient-to-r from-green-50 to-emerald-50/50 rounded-2xl p-6 mb-6 border border-green-200/50">
+          <div class="flex items-center gap-2 mb-2">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            <span class="font-semibold text-emerald-700">Protection de la vie privée</span>
+          </div>
+          <p class="text-slate-700 leading-relaxed">
+            L'Application peut fonctionner <span class="font-semibold text-emerald-700">hors ligne</span>. Par défaut, vos données sont stockées <span class="font-semibold text-emerald-700">localement sur votre appareil</span>. Vous pouvez choisir d'activer des services en ligne (sauvegarde, synchronisation) : dans ce cas, des données peuvent transiter vers nos serveurs ou ceux de prestataires tiers.
+          </p>
         </div>
 
-        <div class="space-y-2">
-          <h4 class="font-semibold">3.2 Données de profil (facultatives)</h4>
-          <ul class="list-disc pl-6 text-slate-700 space-y-1">
-            <li>Âge, sexe, taille, poids — utilisés pour contextualiser les mesures.</li>
-            <li>Langue et préférences d’affichage.</li>
-          </ul>
-        </div>
+        <div class="space-y-6">
+          <div class="bg-blue-50/30 rounded-2xl p-6">
+            <h4 class="font-semibold text-blue-800 mb-3 flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+              </svg>
+              3.1 Données de santé saisies par vous
+            </h4>
+            <ul class="space-y-2 text-slate-700">
+              <li class="flex items-start gap-2">
+                <span class="text-blue-500 mt-1">•</span>
+                Mesures de pression artérielle (systolique, diastolique), fréquence cardiaque, date/heure.
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-blue-500 mt-1">•</span>
+                Annotations facultatives : symptômes, posture, bras mesuré, commentaires.
+              </li>
+            </ul>
+          </div>
 
-        <div class="space-y-2">
-          <h4 class="font-semibold">3.3 Données techniques</h4>
-          <ul class="list-disc pl-6 text-slate-700 space-y-1">
-            <li>Identifiants d’appareil ou système (modèle, OS, version de l’App) — pour diagnostics.</li>
-            <li>Journalisation locale d’erreurs et de performances. Si vous envoyez un rapport d’incident, ces informations peuvent être partagées.</li>
-          </ul>
-        </div>
+          <div class="bg-blue-50/30 rounded-2xl p-6">
+            <h4 class="font-semibold text-blue-800 mb-3 flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+              </svg>
+              3.2 Données techniques
+            </h4>
+            <ul class="space-y-2 text-slate-700">
+              <li class="flex items-start gap-2">
+                <span class="text-blue-500 mt-1">•</span>
+                Identifiants d'appareil ou système (modèle, OS, version de l'App) — pour diagnostics.
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="text-blue-500 mt-1">•</span>
+                Journalisation locale d'erreurs et de performances.
+              </li>
+            </ul>
+          </div>
 
-        <div class="space-y-2">
-          <h4 class="font-semibold">3.4 Permissions & capteurs</h4>
-          <ul class="list-disc pl-6 text-slate-700 space-y-1">
-            <li><span class="font-medium">Bluetooth</span> (si vous associez un tensiomètre connecté) : pour appairage et transfert de mesures.</li>
-            <li><span class="font-medium">Notifications</span> (facultatif) : rappels de prise de mesure.</li>
-            <li><span class="font-medium">Santé/fitness (Google Fit / Apple Health)</span> (facultatif) : lecture/écriture de mesures si vous l’autorisez explicitement.</li>
-          </ul>
-        </div>
-
-        <div class="space-y-2">
-          <h4 class="font-semibold">3.5 Sources tierces (facultatives)</h4>
-          <p class="text-slate-700">Si vous connectez Google Fit / Apple Health, nous accédons uniquement aux catégories de données que vous autorisez. Vous pouvez révoquer cet accès à tout moment depuis les réglages du service tiers.</p>
+          <div class="bg-blue-50/30 rounded-2xl p-6">
+            <h4 class="font-semibold text-blue-800 mb-3 flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+              </svg>
+              3.3 Permissions
+            </h4>
+            <ul class="space-y-2 text-slate-700">
+              <li class="flex items-start gap-2">
+                <span class="text-blue-500 mt-1">•</span>
+                <span class="font-medium">Notifications</span> (facultatif) : rappels de prise de mesure; accès à la caméra et au stockage
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- Continuez avec les autres sections en suivant le même pattern... -->
     <section id="finalites" class="mb-8">
-      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h3 class="text-xl font-semibold mb-3">4. Finalités & bases légales</h3>
-        <ul class="list-disc pl-6 text-slate-700 space-y-1">
-          <li><span class="font-medium">Fournir les fonctionnalités</span> (saisie, historique, graphiques, rappels) — base légale : exécution du contrat (CGU) et intérêt légitime.</li>
-          <li><span class="font-medium">Sauvegarde/synchronisation cloud</span> (si activée) — base légale : consentement.</li>
-          <li><span class="font-medium">Amélioration & support</span> (diagnostics, crash) — base légale : intérêt légitime ou consentement selon le pays.</li>
-          <li><span class="font-medium">Obligations légales</span> (sécurité, conformité) — base légale : obligation légale.</li>
-        </ul>
+      <div class="glass-card rounded-3xl p-8 section-card">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+            <span class="text-blue-600 font-bold text-sm">4</span>
+          </div>
+          <h3 class="text-xl font-semibold text-slate-800">Finalités & bases légales</h3>
+        </div>
+        <div class="space-y-3">
+          <div class="bg-gradient-to-r from-blue-50/50 to-transparent rounded-xl p-4 border-l-4 border-blue-200">
+            <span class="font-semibold text-blue-800">Fournir les fonctionnalités</span> (saisie, historique, graphiques, rappels) — base légale : exécution du contrat (CGU) et intérêt légitime.
+          </div>
+          <div class="bg-gradient-to-r from-blue-50/50 to-transparent rounded-xl p-4 border-l-4 border-blue-200">
+            <span class="font-semibold text-blue-800">Obligations légales</span> (sécurité, conformité) — base légale : obligation légale.
+          </div>
+        </div>
       </div>
     </section>
 
     <section id="stockage" class="mb-8">
-      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm space-y-3">
-        <h3 class="text-xl font-semibold">5. Lieu, transfert & sécurité</h3>
-        <p class="text-slate-700">Par défaut, les données restent sur votre appareil. Si vous activez la sauvegarde/synchronisation, des données peuvent être hébergées dans des centres de données situés hors de votre pays. Nous mettons en place des mesures de protection conformes aux standards (chiffrement en transit, contrôle d’accès).</p>
-        <p class="text-slate-700">Aucune mesure n’étant parfaite, nous vous recommandons d’utiliser un code/verrouillage d’appareil et de maintenir vos systèmes à jour.</p>
+      <div class="glass-card rounded-3xl p-8 section-card">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+            <span class="text-blue-600 font-bold text-sm">5</span>
+          </div>
+          <h3 class="text-xl font-semibold text-slate-800">Lieu, transfert & sécurité</h3>
+        </div>
+        <div class="space-y-4">
+          <p class="text-slate-700 leading-relaxed">Par défaut, les données restent sur votre appareil.</p>
+          <div class="bg-amber-50 border border-amber-200 rounded-xl p-4">
+            <div class="flex items-start gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                <line x1="12" y1="9" x2="12" y2="13"/>
+                <line x1="12" y1="17" x2="12.01" y2="17"/>
+              </svg>
+              <p class="text-amber-800 text-sm">
+                Aucune mesure n'étant parfaite, nous vous recommandons d'utiliser un code/verrouillage d'appareil et de maintenir vos systèmes à jour.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
     <section id="conservation" class="mb-8">
-      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h3 class="text-xl font-semibold mb-3">6. Durées de conservation</h3>
-        <ul class="list-disc pl-6 text-slate-700 space-y-1">
-          <li><span class="font-medium">Données locales</span> : conservées tant que vous n’effacez pas l’Application ou les données depuis les réglages.</li>
-          <li><span class="font-medium">Sauvegarde cloud</span> : jusqu’à suppression par vous ou pendant la durée nécessaire au service.</li>
-          <li><span class="font-medium">Journaux techniques</span> : durées courtes, strictement nécessaires au diagnostic.</li>
-        </ul>
+      <div class="glass-card rounded-3xl p-8 section-card">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+            <span class="text-blue-600 font-bold text-sm">6</span>
+          </div>
+          <h3 class="text-xl font-semibold text-slate-800">Durées de conservation</h3>
+        </div>
+        <div class="space-y-3">
+          <div class="bg-gradient-to-r from-blue-50/50 to-transparent rounded-xl p-4 border-l-4 border-blue-200">
+            <span class="font-semibold text-blue-800">Données locales</span> : conservées tant que vous n'effacez pas l'Application ou les données depuis les réglages.
+          </div>
+          <div class="bg-gradient-to-r from-blue-50/50 to-transparent rounded-xl p-4 border-l-4 border-blue-200">
+            <span class="font-semibold text-blue-800">Journaux techniques</span> : durées courtes, strictement nécessaires au diagnostic.
+          </div>
+        </div>
       </div>
     </section>
 
     <section id="partage" class="mb-8">
-      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h3 class="text-xl font-semibold mb-3">7. Partage avec des tiers</h3>
-        <p class="text-slate-700">Nous ne vendons pas vos données. Elles peuvent être partagées avec :</p>
-        <ul class="list-disc pl-6 text-slate-700 space-y-1">
-          <li>Prestataires techniques (hébergement, sauvegarde, analytics, crash reporting), soumis à des obligations de confidentialité.</li>
-          <li>Autorités, lorsque la loi l’exige.</li>
-        </ul>
+      <div class="glass-card rounded-3xl p-8 section-card">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+            <span class="text-blue-600 font-bold text-sm">7</span>
+          </div>
+          <h3 class="text-xl font-semibold text-slate-800">Partage avec des tiers</h3>
+        </div>
+        <div class="bg-green-50 border border-green-200 rounded-xl p-4 mb-4">
+          <div class="flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+            <p class="text-green-800 font-medium">Nous ne collectons pas et ne vendons pas vos données.</p>
+          </div>
+        </div>
+        <div class="space-y-3">
+          <div class="bg-gradient-to-r from-blue-50/50 to-transparent rounded-xl p-4 border-l-4 border-blue-200">
+            Prestataires techniques (hébergement, sauvegarde, analytics, crash reporting), soumis à des obligations de confidentialité.
+          </div>
+          <div class="bg-gradient-to-r from-blue-50/50 to-transparent rounded-xl p-4 border-l-4 border-blue-200">
+            Autorités, lorsque la loi l'exige.
+          </div>
+        </div>
       </div>
     </section>
 
     <section id="droits" class="mb-8">
-      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm space-y-3">
-        <h3 class="text-xl font-semibold">8. Vos droits</h3>
-        <p class="text-slate-700">Selon votre juridiction, vous pouvez disposer de droits d’<span class="font-medium">accès</span>, <span class="font-medium">rectification</span>, <span class="font-medium">effacement</span>, <span class="font-medium">opposition</span>, <span class="font-medium">limitation</span> et <span class="font-medium">portabilité</span>. Pour exercer ces droits, contactez-nous à <a class="underline" href="mailto:contact@exemple.com" data-field="contactEmail2">contact@exemple.com</a>. Nous pouvons vous demander des informations pour vérifier votre identité.</p>
-        <p class="text-slate-700">Vous pouvez également retirer votre consentement à tout moment (par ex. désactiver la sauvegarde cloud), sans affecter la licéité des traitements antérieurs.</p>
+      <div class="glass-card rounded-3xl p-8 section-card">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+            <span class="text-blue-600 font-bold text-sm">8</span>
+          </div>
+          <h3 class="text-xl font-semibold text-slate-800">Vos droits</h3>
+        </div>
+        <div class="space-y-4">
+          <p class="text-slate-700 leading-relaxed">
+            Selon votre juridiction, vous pouvez disposer de droits d'<span class="font-semibold text-blue-700">accès</span>, <span class="font-semibold text-blue-700">rectification</span>, <span class="font-semibold text-blue-700">effacement</span>, <span class="font-semibold text-blue-700">opposition</span>, <span class="font-semibold text-blue-700">limitation</span> et <span class="font-semibold text-blue-700">portabilité</span>. Pour exercer ces droits, contactez-nous à <a class="text-blue-600 hover:text-blue-700 underline transition-colors" href="mailto:contact@exemple.com" data-field="contactEmail2">mercyinnovationlabb@gmail.com</a>.
+          </p>
+          <p class="text-slate-700 leading-relaxed">
+            Vous pouvez également retirer votre consentement à tout moment (par ex. désactiver la sauvegarde cloud), sans affecter la licéité des traitements antérieurs.
+          </p>
+        </div>
       </div>
     </section>
 
     <section id="enfants" class="mb-8">
-      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h3 class="text-xl font-semibold mb-3">9. Protection des mineurs</h3>
-        <p class="text-slate-700">L’Application ne s’adresse pas aux enfants sans le consentement d’un parent ou tuteur lorsque la loi l’exige. Si vous pensez que des données d’un mineur ont été collectées sans autorisation, écrivez-nous : nous les supprimerons.</p>
-      </div>
-    </section>
-
-    <section id="services" class="mb-8">
-      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm space-y-2">
-        <h3 class="text-xl font-semibold">10. Services et SDK tiers</h3>
-        <p class="text-slate-700">Selon votre configuration, nous pouvons utiliser :</p>
-        <ul class="list-disc pl-6 text-slate-700 space-y-1">
-          <li>Hébergement/sauvegarde (ex. Firebase, GCP, AWS, Supabase)</li>
-          <li>Crash reporting & analytics (ex. Firebase Crashlytics/Analytics, Sentry) — avec votre consentement lorsque requis.</li>
-          <li>Intégrations santé (Google Fit / Apple Health) — accès limité aux données autorisées par vous.</li>
-        </ul>
-        <p class="text-slate-700">Les politiques de confidentialité de ces services s’appliquent également. Consultez-les pour plus d’informations.</p>
+      <div class="glass-card rounded-3xl p-8 section-card">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+            <span class="text-blue-600 font-bold text-sm">9</span>
+          </div>
+          <h3 class="text-xl font-semibold text-slate-800">Protection des mineurs</h3>
+        </div>
+        <p class="text-slate-700 leading-relaxed">
+          L'Application ne s'adresse pas aux enfants sans le consentement d'un parent ou tuteur lorsque la loi l'exige. Si vous pensez que des données d'un mineur ont été collectées sans autorisation, écrivez-nous : nous les supprimerons.
+        </p>
       </div>
     </section>
 
     <section id="cookies" class="mb-8">
-      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h3 class="text-xl font-semibold mb-3">11. Cookies & technologies similaires</h3>
-        <p class="text-slate-700">L’Application mobile n’utilise pas de cookies de navigateur. Si vous consultez notre site web d’assistance, des cookies peuvent être utilisés selon notre bannière d’information.</p>
-      </div>
-    </section>
-
-    <section id="maj" class="mb-8">
-      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h3 class="text-xl font-semibold mb-3">12. Mises à jour de la politique</h3>
-        <p class="text-slate-700">Nous pouvons modifier cette politique pour refléter des changements réglementaires, techniques ou fonctionnels. Nous vous informerons des mises à jour importantes via l’Application ou par tout autre moyen approprié. La date de « Dernière mise à jour » sera ajustée en conséquence.</p>
-      </div>
-    </section>
-
-    <section id="contact" class="mb-16">
-      <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-        <h3 class="text-xl font-semibold mb-3">13. Contact</h3>
-        <p class="text-slate-700">Pour toute question ou demande relative à cette politique, contactez : <span class="font-medium" data-field="orgName3">MERCY INNOVATION LAB</span> — <a class="underline" href="mailto:contact@exemple.com" data-field="contactEmail3">mercyinnovationlabb@gmail.com</a>.</p>
-      </div>
-    </section>
-  </main>
-
-  <footer class="border-t bg-white/80">
-    <div class="max-w-4xl mx-auto px-4 py-6 text-sm text-slate-500">
-      © <span id="year"></span> <span data-field="orgName4">MERCY INNOVATION LAB</span>. Tous droits réservés.
-    </div>
-  </footer>
-
-  <script>
-    // Utilitaires : mise à jour année et éventuels remplacements dynamiques
-    document.getElementById('year').textContent = new Date().getFullYear();
-    // 👉 Personnalisez ces valeurs si vous le souhaitez via le DOM :
-    // document.getElementById('appName').textContent = 'Nom de votre App';
-    // document.getElementById('orgName').textContent = 'Votre organisation';
-    // document.getElementById('contactEmail').textContent = 'support@votre-domaine.com';
-    // document.getElementById('contactEmail').href = 'mailto:support@votre-domaine.com';
-    // document.getElementById('orgAddress').textContent = 'Votre adresse complète';
-    // document.getElementById('lastUpdated').textContent = 'JJ mois AAAA';
-  </script>
-</body>
-</html>
+      <div class="glass-card rounded-3xl p-8 section-card">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+            <span class="text-blue-600 font-bold text-sm">10</span
